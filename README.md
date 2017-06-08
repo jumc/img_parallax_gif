@@ -18,7 +18,9 @@ Overlap new images with different relative positions
 	The extended planes generated in the previous steps will be overlapped with a variable position difference, generating various frames that once put together simulate the relative movement of the scene objects.
 Generate gif
 We’ll use the OpenCV and Matplotlib modules in order to convert the output frames into a gif animation, making use of the function matplotlib.animation.ArtistAnimation.
- 
+
+Image base
+https://drive.google.com/open?id=0BxHj0zhF4J8-TXZYMmp3VDNXbW8
 	
  
  
