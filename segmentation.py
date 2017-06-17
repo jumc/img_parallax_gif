@@ -21,9 +21,9 @@ def merge_mean_color(graph, src, dst): # source: goo.gl/9kuZMH
 def regions2img(original_img, labels, save): 
     """ save == True: saves resulting images
         save == False: displays resulting images """
-    regions = regionprops(labels+1)
+    regions = regionprops(labels+1) # if you don't add 1, one of the regions gets ignored
     num_regions = len(regions)
-    for i,region in enumerate(regionprops(labels+1)): # if you don't add 1, one of the regions gets ignored
+    for i,region in enumerate(regions): 
         new_img = np.zeros((original_img.shape[0], original_img.shape[1], 4), dtype=np.uint8) 
         for pxl in region['coords']:
             original_pxl = original_img[pxl[0]][pxl[1]]
