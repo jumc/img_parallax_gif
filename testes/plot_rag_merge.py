@@ -61,27 +61,40 @@ def merge_mean_color(graph, src, dst):
                                      graph.node[dst]['pixel count'])
 
 
-img = io.imread('test2.jpg')
+img = io.imread('test3.jpg')
 # print(img.shape)
 # img = resize(img, (800,1200, 3), mode='reflect')
 print(img.shape)
 # img = downscale_local_mean(img,(6,6,1))
 # img = rescale(img, 0.2)
 # img = data.coins()
-labels = segmentation.slic(img, compactness=30, n_segments=4)
-g = graph.rag_mean_color(img, labels)
+# plt.subplot(5, 6, 1)
+# plt.title("original")
+# plt.imshow(img)
 
-labels2 = graph.merge_hierarchical(labels, g, thresh=35, rag_copy=False,
-                                   in_place_merge=True,
-                                   merge_func=merge_mean_color,
-                                   weight_func=_weight_mean_color)
+for i in range(6):
+    for j in range(1, 6):
+        labels = segmentation.slic(img, compactness=30, multichannel=True, n_segments=(35+i*18))
+        g = graph.rag_mean_color(img, labels)
 
-g2 = graph.rag_mean_color(img, labels2)
+        labels2 = graph.merge_hierarchical(labels, g, thresh=31+7*j, rag_copy=False,
+                                           in_place_merge=True,
+                                           merge_func=merge_mean_color,
+                                           weight_func=_weight_mean_color)
 
-out = color.label2rgb(labels2, img, kind='avg')
-out = segmentation.mark_boundaries(out, labels2, (0, 0, 0))
-# io.imshow(out)
-# io.show()
-plt.subplot(121), plt.imshow(img)
-plt.subplot(122), plt.imshow(out)
+        g2 = graph.rag_mean_color(img, labels2)
+
+        out = color.label2rgb(labels2, img, kind='avg')
+        out = segmentation.mark_boundaries(out, labels2, (0, 0, 0))
+        # io.imshow(out)
+        # io.show()
+        plt.subplot(6, 5, 5*i+j) 
+        plt.title(str(35+i*18)+'/'+str(31+7*j))
+        plt.imshow(out)
+        print("#",str(i)," done")
+
+import winsound
+winsound.Beep(1000,700) # lembrar de desabilitar o som do windows de novo
+
 plt.show()
+# melhor até agora = 35/52 multichannel=True
