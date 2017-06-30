@@ -18,7 +18,7 @@ img = io.imread('input_images/test3.jpg')
 ```shell
 python main.py
 ```
-3. The outpuf animation will be stored at ```./generated_gifs/```
+3. The resulting animation will be stored at ```./generated_gifs/```
 
 ## Image base:
 https://drive.google.com/open?id=0BxHj0zhF4J8-TXZYMmp3VDNXbW8
